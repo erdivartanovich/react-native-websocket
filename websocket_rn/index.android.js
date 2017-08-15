@@ -1,53 +1,96 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
-  Text,
   View
 } from 'react-native';
+import { 
+  Container, 
+  Header,
+  Body,
+  Right,
+  Title, 
+  Button,
+  Input,
+  Item, 
+  Text
+} from 'native-base';
+import { Col, Row, Grid } from 'react-native-easy-grid';
+
+import io from 'socket.io-client'
 
 export default class websocket_rn extends Component {
+  constructor() {
+    super()
+    this.socket = io('http://10.0.3.2:3000')
+    this.state = {
+      connected: true,
+      message: ''
+    }
+    this.props = {
+      message: ''
+    }
+  }
+
+  connectToServer() {
+    this.socket.connect()
+    this.setState({
+      connected: true
+    })
+  }
+  disconnectFromServer() {
+    this.socket.disconnect()
+    this.setState({
+      connected: false
+    })
+  }
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+      <Container style={{flex: 1}}>
+        <Header>
+          <Body>
+              <Title>Realtime Chat</Title>
+          </Body>
+          <Right>
+              <Button onPress={()=>{
+                console.log(this.state)
+                if(this.state.connected) {
+                  this.disconnectFromServer()
+                } else {
+                  this.connectToServer()
+                }
+              }}>
+                <Text>
+                  {this.state.connected ? 'Disconnect': 'Connect'}
+                </Text>
+              </Button>
+          </Right>
+        </Header>
+        <Row size={7}>
+              <Text> {this.state.message} </Text>
+        </Row>
+        <Row size={4} style={{backgroundColor: 'silver'}}>
+          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Item regular>
+                  <Input placeholder='Say something here' onChangeText={(msg) => {
+                    this.props = {
+                      message: msg
+                    }
+                  }}/>
+                  <Button full primary onPress={()=>{
+                    this.socket.emit('chat message', this.props.message)
+                    this.setState({
+                      message: this.props.message
+                    })
+                  }}>
+                    <Text>send</Text>
+                  </Button>
+            </Item>
+          </View>
+        </Row>
+      </Container>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('websocket_rn', () => websocket_rn);
