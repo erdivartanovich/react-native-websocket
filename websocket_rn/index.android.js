@@ -29,10 +29,15 @@ export default class websocket_rn extends Component {
     this.props = {
       message: ''
     }
+    this.socket.emit('userjoin', 'erdi')
+    this.socket.on('history', (data)=>{
+        console.log(data)
+    })
   }
 
   connectToServer() {
     this.socket.connect()
+    this.socket.emit('userjoin', 'erdi')
     this.setState({
       connected: true
     })
