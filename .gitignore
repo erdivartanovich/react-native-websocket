@@ -1,0 +1,7 @@
+server/node_modules/
+websocket_rn/node_modules/
+websocket_rn/build/
+websocket_rn/buck-out/
+websocket_rn/\.buckd/
+websocket_rn/.gradle
+websocket_rn/*.keystore
