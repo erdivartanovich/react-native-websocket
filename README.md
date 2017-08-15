@@ -30,10 +30,12 @@ var io = require('socket.io')(http);
 ```js
     io.on('connection', function(socket){
         console.log('a client is connected')
-        socket.on('disconnect', function(){
+
+        socket.on('disconnect', function(socket){
             console.log('client disconnected');
         })
-        socket.on('chat message', function(msg){
+
+        socket.on('chat message', function(msg, socket){
             console.log('message from client: ', msg)
         })
     })
