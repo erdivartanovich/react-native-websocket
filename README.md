@@ -25,4 +25,22 @@ var http = require('http').Server(app)
 var io = require('socket.io')(http);
 ```
 
+## Listening to an event (All party server or client)
 
+```js
+    io.on('connection', function(socket){
+        console.log('a client is connected')
+        socket.on('disconnect', function(){
+            console.log('client disconnected');
+        })
+        socket.on('chat message', function(msg){
+            console.log('message from client: ', msg)
+        })
+    })
+```
+
+## Emiting an event (All party server or client)
+
+```js
+    io.emit('chat message', 'this is my message')
+```

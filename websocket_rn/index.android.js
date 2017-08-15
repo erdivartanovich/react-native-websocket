@@ -19,8 +19,8 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 import io from 'socket.io-client'
 
 export default class websocket_rn extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.socket = io('http://10.0.3.2:3000')
     this.state = {
       connected: true,
