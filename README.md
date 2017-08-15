@@ -3,13 +3,13 @@
 ## Init an Express server
 
 ```js 
-var app = require('express)(); 
+var app = require('express')(); 
 ```
 
 ## Init a Socket.io
 
 ```js
-var io = require('socket.io); 
+var io = require('socket.io'); 
 ```
 
 ## Socket.io need an http bridge to bind to the Express middleware
