@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-export default class RealtimeBrochure extends Component {
+export default class websocket_rn extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('RealtimeBrochure', () => RealtimeBrochure);
+AppRegistry.registerComponent('websocket_rn', () => websocket_rn);

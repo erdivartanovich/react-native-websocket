@@ -1,4 +1,4 @@
-package com.realtimebrochure;
+package com.websocket_rn;
 
 import android.app.Application;
 
