@@ -12,7 +12,7 @@ var app = require('express')();
 var io = require('socket.io'); 
 ```
 
-## Socket.io need an http bridge to bind to the Express middleware
+## Socket.io need an http bridge to bind to the Express as middleware
 - Init http middleware that bind to the express server
 
 ```js
@@ -25,7 +25,7 @@ var http = require('http').Server(app)
 var io = require('socket.io')(http);
 ```
 
-## Listening to an event (All party server or client)
+## Listening to an event (All party, server or client)
 
 ```js
     io.on('connection', function(socket){
@@ -39,8 +39,17 @@ var io = require('socket.io')(http);
     })
 ```
 
-## Emiting an event (All party server or client)
+## Emiting an event (All party, server or client)
 
 ```js
     io.emit('chat message', 'this is my message')
 ```
+
+
+**ScreenShot**
+
+The client will looked like this:
+
+<p>
+    <img src="websocket.png" height="500" />
+</p>
